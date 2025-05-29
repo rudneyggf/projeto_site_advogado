@@ -1,47 +1,58 @@
 package pessoal.backend_advogado.model;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "cliente")
-public class Cliente {
+public class Cliente  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
-    private String nome;
-
+    @Column(nullable = false, unique = true)
     private String cpf;
 
+    @Column(nullable = false)
     private  String RG;
 
+    @Column(nullable = false)
     private String telefone;
-
-    @Column(nullable = false, unique = true)
-    private String email;
-
-    private String senha;
 
     @Embedded
     private Endereco endereco;
 
-    public Cliente(Integer id,String nome, String email, String senha) {
+    @Column(name = "descricao_processo", nullable = false)
+    private String descricaoProcesso;
+
+
+    public Cliente() {}
+
+    public Cliente(String cpf, String RG, String telefone, Endereco endereco, String descricaoProcesso) {
+        this.cpf = cpf;
+        this.RG = RG;
+        this.telefone = telefone;
+        this.endereco = endereco;
+        this.descricaoProcesso = descricaoProcesso;
+    }
+
+    public Cliente(Integer id,String cpf, String RG, String telefone, Endereco endereco, String descricaoProcesso) {
         this.id = id;
-        this.nome=nome;
-        this.email=email;
-        this.senha=senha;
+        this.cpf = cpf;
+        this.RG = RG;
+        this.telefone = telefone;
+        this.endereco = endereco;
+        this.descricaoProcesso = descricaoProcesso;
     }
 
-    public Cliente() {
-
-    } public Integer getId() {
+    public Integer getId() {
         return id;
-    }
-
-    public String getNome() {
-        return nome;
     }
 
     public String getCpf() {
@@ -56,14 +67,6 @@ public class Cliente {
         return telefone;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
     public Endereco getEndereco() {
         return endereco;
     }
@@ -72,9 +75,6 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
@@ -87,5 +87,12 @@ public class Cliente {
 
     public void setRG(String RG) {
         this.RG = RG;
+    }
+
+    public void setDescricaoProcesso(String descricaoProcesso) {
+        this.descricaoProcesso = descricaoProcesso;
+    }
+    public String getDescricaoProcesso() {
+        return descricaoProcesso;
     }
 }

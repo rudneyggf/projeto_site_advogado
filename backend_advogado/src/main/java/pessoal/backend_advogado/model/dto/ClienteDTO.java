@@ -1,11 +1,11 @@
 package pessoal.backend_advogado.model.dto;
 
-import jakarta.persistence.*;
 import pessoal.backend_advogado.model.Cliente;
 import pessoal.backend_advogado.model.Endereco;
 
-public class ClienteProcessoDTO {
+public class ClienteDTO {
 
+    private Integer id;
 
     private String cpf;
 
@@ -14,6 +14,16 @@ public class ClienteProcessoDTO {
     private String telefone;
 
     private Endereco endereco;
+
+    private String descricaoProcesso;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getCpf() {
         return cpf;
@@ -39,21 +49,24 @@ public class ClienteProcessoDTO {
         this.endereco = endereco;
     }
 
-    public ClienteProcessoDTO(String cpf, String RG, String telefone, Endereco endereco) {
+    public ClienteDTO(String cpf, String RG, String telefone, Endereco endereco, String descricaoProcesso) {
         this.cpf = cpf;
         this.RG = RG;
         this.telefone = telefone;
         this.endereco = endereco;
+        this.descricaoProcesso = descricaoProcesso;
     }
 
-    public void ToModel(Cliente cliente) {
-        cliente.setCpf(cpf);
-        cliente.setRG(RG);
-        cliente.setTelefone(telefone);
-        cliente.setEndereco(endereco);
+
+    public Cliente ToModel() {
+        return new Cliente(cpf,RG,telefone,endereco,descricaoProcesso);
     }
 
-    public static ClienteProcessoDTO FromModel(Cliente cliente) {
-        return new ClienteProcessoDTO(cliente.getCpf(), cliente.getRG(), cliente.getTelefone(), cliente.getEndereco());
+    public Cliente ToModelPut() {
+        return new Cliente(id,cpf,RG,telefone,endereco,descricaoProcesso);
+    }
+
+    public static ClienteDTO FromModel(Cliente cliente) {
+        return new ClienteDTO(cliente.getCpf(), cliente.getRG(), cliente.getTelefone(), cliente.getEndereco(), cliente.getDescricaoProcesso());
     }
 }
