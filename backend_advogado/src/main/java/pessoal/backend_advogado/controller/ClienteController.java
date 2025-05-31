@@ -2,22 +2,28 @@ package pessoal.backend_advogado.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import pessoal.backend_advogado.model.Cliente;
+import pessoal.backend_advogado.model.Usuario;
 import pessoal.backend_advogado.model.dto.ClienteDTO;
 import pessoal.backend_advogado.repository.ClienteRepository;
+import pessoal.backend_advogado.repository.UsuarioRepository;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Controller
+@RestController
 @RequestMapping("cliente")
+@CrossOrigin("*")
 public class ClienteController {
 
     @Autowired
     private ClienteRepository clienteRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @GetMapping
     public List<ClienteDTO> listarClientesEmOrdemAlfabetica (){
@@ -39,12 +45,26 @@ public class ClienteController {
         }
     }
 
+    @GetMapping("/me")
+    public List<ClienteDTO> buscarClienteMe (Authentication authentication){
+     String nome = authentication.getName();
+        List<Cliente> lista = clienteRepository.findByUsuarioNome(nome);
+        return lista
+                .stream()
+                .map(ClienteDTO::FromModel)
+                .collect(Collectors.toList());
+    }
+
     @PostMapping
-    public ResponseEntity<ClienteDTO> criarCliente (@RequestBody ClienteDTO clienteDto){
+    public ResponseEntity<ClienteDTO> criarCliente (@RequestBody ClienteDTO clienteDto,Authentication authentication){
+        String nome = authentication.getName();
+        Usuario usuario = usuarioRepository.findByNome(nome).get();
+        clienteDto.setUsuario(usuario);
         Cliente cliente = clienteDto.ToModel();
         clienteRepository.save(cliente);
         return ResponseEntity.ok(ClienteDTO.FromModel(cliente));
     }
+
 
    @DeleteMapping("/{id}")
    public ResponseEntity<ClienteDTO> deletarCliente (@PathVariable Integer id){

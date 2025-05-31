@@ -1,9 +1,6 @@
 package pessoal.backend_advogado.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+
+@Entity
 public class Usuario implements UserDetails {
 
     @Id
@@ -25,6 +24,7 @@ public class Usuario implements UserDetails {
 
     private String senha;
 
+    @Enumerated(EnumType.STRING)
     private Role role;
 
 
@@ -37,6 +37,13 @@ public class Usuario implements UserDetails {
         this.senha = senha;
     }
 
+    public Usuario(Integer id, String nome, String email, String senha, Role role) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.role = role;
+    }
 
     public Integer getId() {
         return id;
@@ -52,7 +59,7 @@ public class Usuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role== Role.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        if(this.role == Role.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
         else return List.of(new SimpleGrantedAuthority("ROLE_USUARIO"));
     }
 

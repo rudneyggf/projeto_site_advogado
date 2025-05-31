@@ -2,14 +2,16 @@ package pessoal.backend_advogado.model.dto;
 
 public class AuthenticationDTO {
 
-    private String username;
+    private String nome;
     private String senha;
 
-    public String getUsername() {
-        return username;
+    public String getNome() {
+        return nome;
     }
 
     public String getSenha() {
         return senha;
     }
+
+
 }

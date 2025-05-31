@@ -31,24 +31,30 @@ public class Cliente  {
     @Column(name = "descricao_processo", nullable = false)
     private String descricaoProcesso;
 
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Usuario usuario;
+
 
     public Cliente() {}
 
-    public Cliente(String cpf, String RG, String telefone, Endereco endereco, String descricaoProcesso) {
+    public Cliente(String cpf, String RG, String telefone, Endereco endereco, String descricaoProcesso, Usuario usuario) {
         this.cpf = cpf;
         this.RG = RG;
         this.telefone = telefone;
         this.endereco = endereco;
         this.descricaoProcesso = descricaoProcesso;
+        this.usuario = usuario;
     }
 
-    public Cliente(Integer id,String cpf, String RG, String telefone, Endereco endereco, String descricaoProcesso) {
+    public Cliente(Integer id,String cpf, String RG, String telefone, Endereco endereco, String descricaoProcesso, Usuario usuario) {
         this.id = id;
         this.cpf = cpf;
         this.RG = RG;
         this.telefone = telefone;
         this.endereco = endereco;
         this.descricaoProcesso = descricaoProcesso;
+        this.usuario = usuario;
     }
 
     public Integer getId() {
@@ -94,5 +100,9 @@ public class Cliente  {
     }
     public String getDescricaoProcesso() {
         return descricaoProcesso;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
     }
 }
