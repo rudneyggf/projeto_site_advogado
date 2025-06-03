@@ -62,13 +62,12 @@ public class ClienteDTO {
 
 
 
-    public ClienteDTO(String cpf, String RG, String telefone, String descricaoProcesso,Usuario usuario,
+    public ClienteDTO(String cpf, String RG, String telefone, String descricaoProcesso,
                       String logradouro, String numero, String complemento, String bairro) {
         this.cpf = cpf;
         this.RG = RG;
         this.telefone = telefone;
         this.descricaoProcesso = descricaoProcesso;
-        this.usuario = usuario;
         this.logradouro = logradouro;
         this.numero = numero;
         this.complemento = complemento;
@@ -101,7 +100,7 @@ public class ClienteDTO {
 
     public static ClienteDTO FromModel(Cliente cliente) {
         return new ClienteDTO(cliente.getCpf(), cliente.getRG(), cliente.getTelefone(),
-                cliente.getDescricaoProcesso(), cliente.getUsuario(),
+                cliente.getDescricaoProcesso(),
                 cliente.getEndereco().getLogradouro(),cliente.getEndereco().getNumero(),
                 cliente.getEndereco().getComplemento(),cliente.getEndereco().getBairro());
     }
