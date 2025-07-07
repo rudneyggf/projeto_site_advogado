@@ -1,0 +1,60 @@
+nav{
+  display: flex;
+}
+header{
+  font-family: Playfair Display;
+}
+body{
+  margin: 0;
+}
+
+footer span{
+  font-weight: bold;
+}
+
+section{
+  display: flex;
+  margin-top: 50px;
+  align-items: center;
+}
+
+#section_1{
+  gap: 400px;
+}
+
+#section_2{
+  gap: 120px;
+  background-color: black;
+  color: white;
+}
+
+
+#paragrafo_slogan{
+  font-size: 50px;
+  text-align: center;
+  max-width: 720px;
+  max-height: 420px;
+}
+
+#foto_gera{
+  margin-left: 10px;
+}
+
+ul{
+  font-size: 20px;
+}
+
+.informacoes_de_contato{
+  display: flex;
+  align-items: start; /* opcional, centraliza os textos */
+  gap: 5px; /* espaço entre os <p> */
+  margin-top: 2rem;
+  justify-content: space-around;
+  align-items: center;
+  line-height: 8.5px;
+  margin-bottom: 10px;
+}
+
+.informacoes_de_contato div{
+  font-size: 2em;
+}

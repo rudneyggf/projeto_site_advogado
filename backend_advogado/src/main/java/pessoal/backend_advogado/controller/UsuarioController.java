@@ -21,7 +21,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<UsuarioDTO> buscarUsuarioporID( @PathVariable Integer id) {
         Optional <Usuario> usuario = usuarioRepository.findById(id);
         if (usuario.isPresent()) {

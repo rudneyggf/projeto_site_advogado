@@ -1,0 +1,43 @@
+.div_header{
+    display: flex;
+    background-color: lightgray;
+    justify-content: center;
+}
+
+.navbar{
+    display: flex;
+    gap: 1px;
+}
+
+.links{
+    flex-grow: 1;
+    text-align: center;
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    font-size: 24px;
+}
+.botoes_header{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+}
+
+
+.botoes_cadastro_login{
+    text-decoration: none;
+    color: black;
+    padding: 10px;
+    min-width: 200px;
+    background-color:white;
+    border-radius: 6px;
+    border: 0px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.logo{
+margin-right: 300px;
+margin-left: 530px;
+}

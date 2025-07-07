@@ -14,6 +14,7 @@ import pessoal.backend_advogado.model.dto.AuthenticationDTO;
 import pessoal.backend_advogado.model.dto.UsuarioDTO;
 import pessoal.backend_advogado.repository.ClienteRepository;
 import pessoal.backend_advogado.repository.UsuarioRepository;
+import pessoal.backend_advogado.service.TokenService;
 
 @RestController
 @RequestMapping("autenticar")
@@ -26,12 +27,18 @@ public class AutheticationController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping("/login")
     public ResponseEntity login (@RequestBody @Validated AuthenticationDTO authenticationDTO) {
         var UsuarioAutenticando = new UsernamePasswordAuthenticationToken(authenticationDTO.getNome(), authenticationDTO.getSenha());
         var autenticaçao = this.authenticationManager.authenticate(UsuarioAutenticando);
 
-        return ResponseEntity.ok().build();
+        String token = tokenService.GenerateToken((Usuario) autenticaçao.getPrincipal());
+
+
+        return ResponseEntity.ok(token);
     }
 
     @PostMapping("/cadastrar")
