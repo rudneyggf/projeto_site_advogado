@@ -5,12 +5,14 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 import pessoal.backend_advogado.model.Usuario;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.stream.Collectors;
 
 @Service
 public class TokenService {
@@ -24,6 +26,9 @@ public class TokenService {
             String token = JWT.create()
                     .withIssuer("landpage_GG_Advogados")
                     .withSubject(usuario.getUsername())
+                    .withClaim("authorities",usuario.getAuthorities().stream()
+                            .map(GrantedAuthority::getAuthority)
+                            .collect(Collectors.toList()))
                     .withExpiresAt(getDataExpiracao())
                     .sign(algorithm);
             return token;

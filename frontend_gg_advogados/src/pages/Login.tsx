@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 export default function Login(){
-  const router = useRouter();
+    const router = useRouter();
     const [nome, setNome] = useState("");
     const [senha, setSenha] = useState("");
     const [erro, setErro] = useState("");
@@ -22,7 +22,7 @@ export default function Login(){
           localStorage.setItem("token",token);
           setErro("");
           
-          router.push("/");
+          router.push("/HomepageUser");
         } catch (error) {
           setErro(" Senha ou nome inválidos, tente novamente.")
         }

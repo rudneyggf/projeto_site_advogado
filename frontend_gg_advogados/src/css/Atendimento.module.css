@@ -1,0 +1,71 @@
+.atendimento, .pedido{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 2px;
+    border-radius: 5px;
+    border-style: outset;
+    padding: 10px;
+    font-size: 23px;
+    min-width: 800px;
+}
+
+.pedido{
+    max-width: 800px;
+    margin-bottom: 10px;
+}
+
+
+.div_atendimento{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.botoes_CRUD_pedido{
+    color: white;
+    padding: 10px;
+    border: none;
+    font-size: 20px;
+}
+
+.atendimento label{
+    margin-right: 10px;
+}
+
+.atendimento input{
+    font-size: 18px;
+}
+
+
+.pedido p{
+    margin: 0;
+}
+
+.flex_main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.botao_confirmar{
+    background-color: green;
+}
+
+.botao_deletar{
+    background-color: red;
+    min-width: 300px;
+}
+
+.botao_editar{
+    background-color: rgb(24, 157, 209);
+     min-width: 300px;
+}
+
+.div_botoesCRUD{
+    display: flex;
+    justify-content: space-around;
+    
+}
