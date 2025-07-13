@@ -1,7 +1,11 @@
 export interface PedidoProps{ 
-  nome: string;
-  cpf: string;
-  rg: string;
-  ocupacao: string;
+  cpf: string
+  rg: string
+  telefone : string
+  ocupacao: string
+  logradouro :string
+  numero:number
+  bairro: string
+  complemento?:string
   descricao_processo: string
 }

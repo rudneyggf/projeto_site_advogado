@@ -14,14 +14,16 @@ public class ClienteDTO {
 
     private String telefone;
 
+    private String ocupacao;
+
     private String logradouro;
 
     private String numero;
 
-    private String complemento;
-
     private String bairro;
 
+    private String complemento;
+    
     private String descricaoProcesso;
 
     private  Usuario usuario;
@@ -84,7 +86,7 @@ public class ClienteDTO {
         endereco.setNumero(this.numero);
         endereco.setLogradouro(this.logradouro);
 
-        return new Cliente(cpf,RG,telefone,endereco,descricaoProcesso,usuario);
+        return new Cliente(cpf,RG,ocupacao,telefone,endereco,descricaoProcesso,usuario);
     }
 
     public Cliente ToModelPut() {
@@ -95,7 +97,7 @@ public class ClienteDTO {
         endereco.setNumero(this.numero);
         endereco.setLogradouro(this.logradouro);
 
-        return new Cliente(id,cpf,RG,telefone,endereco,descricaoProcesso,usuario);
+        return new Cliente(id,cpf,RG,ocupacao,telefone,endereco,descricaoProcesso,usuario);
     }
 
     public static ClienteDTO FromModel(Cliente cliente) {

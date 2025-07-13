@@ -1,17 +1,21 @@
 package pessoal.backend_advogado.model;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class Endereco {
 
+    @Column(nullable = false)
     private String logradouro;
 
+    @Column(nullable = false)
     private String numero;
 
     private String complemento;
 
+    @Column(nullable = false)
     private String bairro;
 
     public void setBairro(String bairro) {

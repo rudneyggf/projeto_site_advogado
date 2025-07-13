@@ -4,8 +4,46 @@ import Head from "next/head";
 import style from "@/css/Atendimento.module.css"
 import "@/css/globals.css"
 import Pedido from "@/components/Pedido";
+import api from "@/services/api"
+import { useEffect } from "react";
+import { PedidoProps} from "@/types/pedido";
 
 const Atendimento = () =>{
+
+    const MostrarPedidos = async () =>{
+        const token = localStorage.getItem("token");
+        
+        let pedido : PedidoProps = {
+              cpf: "",
+              rg: "",
+              telefone:"",
+              ocupacao: "",
+              logradouro : "",
+              numero: 0,
+              bairro: "",
+              complemento :"",
+              descricao_processo: ""
+        }
+
+        try{
+            const response = await api.get("/cliente/me",{
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            });
+          
+            const dados_pedidos = response.data;
+            console.log(dados_pedidos);
+
+        }catch(error){
+            console.log("Ocorreu um erro");
+        }
+    }
+
+    useEffect(()=>{
+        MostrarPedidos();
+    },[]);
+
     return (<>
          <Head>
                 <link rel="stylesheet" 
@@ -33,12 +71,36 @@ const Atendimento = () =>{
                         <input type="text" id="ocupacao" placeholder="Digite sua profissão"/>
                     </span>
 
+                    <span>
+                        <label htmlFor="logradouro">Logradouro:</label>
+                        <input type="text" id="logradouro" placeholder="Rua da Consolação"/>
+                    </span>
+
+                    <span>
+                        <label htmlFor="numero" >Número do endereço:</label>
+                        <input type="number" id="numero" placeholder="67"/>
+                    </span>
+
+                    <span>
+                        <label htmlFor="bairro">Bairro</label>
+                        <input type="text" id="bairro" placeholder="Cohatrac"/>
+                    </span>
+
+                    <span>
+                        <label htmlFor="bairro">Complemento</label>
+                        <input type="text" id="bairro" />
+                    </span>
+
+                    <span>
+                        <label htmlFor="processo">Descrição do Processo:</label>
+                        <textarea name="descricao" id="processo"  placeholder="Digite o seu problema"></textarea>
+                    </span>
+   
                     <button type="submit" className={`${style.botoes_CRUD_pedido} ${style.botao_confirmar} `}>Confirmar</button>
                 </form>
             </div>
 
-            <Pedido></Pedido>
-
+            
          </main>
 
          <Footer></Footer>

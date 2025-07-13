@@ -39,19 +39,19 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST,"/autenticar/cadastrar").permitAll()
                         .requestMatchers(HttpMethod.GET,"/usuario/*").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET,"/cliente").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/cliente/me").hasRole("USUARIO")
                         .requestMatchers(HttpMethod.GET,"/cliente/*").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT,"/cliente/*").hasRole("USUARIO")
                         .requestMatchers(HttpMethod.POST,"/cliente").hasRole("USUARIO")
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
-                .formLogin(formLogin -> formLogin.permitAll().loginPage("http://localhost:3000/Login"))
                 .build();
     }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000"));
+        configuration.setAllowedOriginPatterns(List.of("http://localhost:3000"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);

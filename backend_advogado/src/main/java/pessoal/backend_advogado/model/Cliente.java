@@ -25,6 +25,9 @@ public class Cliente  {
     @Column(nullable = false)
     private String telefone;
 
+    @Column(nullable = false)
+    private String ocupacao;
+
     @Embedded
     private Endereco endereco;
 
@@ -38,18 +41,20 @@ public class Cliente  {
 
     public Cliente() {}
 
-    public Cliente(String cpf, String RG, String telefone, Endereco endereco, String descricaoProcesso, Usuario usuario) {
+    public Cliente(String cpf, String RG, String telefone,String ocupacao , Endereco endereco, String descricaoProcesso, Usuario usuario) {
         this.cpf = cpf;
         this.RG = RG;
+        this.ocupacao = ocupacao;
         this.telefone = telefone;
         this.endereco = endereco;
         this.descricaoProcesso = descricaoProcesso;
         this.usuario = usuario;
     }
 
-    public Cliente(Integer id,String cpf, String RG, String telefone, Endereco endereco, String descricaoProcesso, Usuario usuario) {
+    public Cliente(Integer id,String cpf, String RG,String ocupacao , String telefone, Endereco endereco, String descricaoProcesso, Usuario usuario) {
         this.id = id;
         this.cpf = cpf;
+        this.ocupacao = ocupacao;
         this.RG = RG;
         this.telefone = telefone;
         this.endereco = endereco;

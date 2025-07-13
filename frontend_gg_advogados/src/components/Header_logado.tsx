@@ -20,7 +20,6 @@ const Header_logado = () =>{
             try{
                 const token = localStorage.getItem("token") as string;
                 const decoded_token = jwtDecode(token) as Token;
-
                 if (decoded_token.authorities.includes("ROLE_ADMIN"))
                     setAdmLogado(true)
                 else
