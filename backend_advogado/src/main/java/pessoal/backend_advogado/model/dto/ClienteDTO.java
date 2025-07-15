@@ -62,13 +62,61 @@ public class ClienteDTO {
         return usuario;
     }
 
+    public String getOcupacao() {
+        return ocupacao;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public String getDescricaoProcesso() {
+        return descricaoProcesso;
+    }
+
+    public void setOcupacao(String ocupacao) {
+        this.ocupacao = ocupacao;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    public void setRG(String RG) {
+        this.RG = RG;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public void setDescricaoProcesso(String descricaoProcesso) {
+        this.descricaoProcesso = descricaoProcesso;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
 
 
-    public ClienteDTO(String cpf, String RG, String telefone, String descricaoProcesso,
-                      String logradouro, String numero, String complemento, String bairro) {
+    public ClienteDTO(String cpf, String RG, String telefone, String ocupacao,
+                      String logradouro, String numero, String bairro, String complemento, String descricaoProcesso) {
         this.cpf = cpf;
         this.RG = RG;
         this.telefone = telefone;
+        this.ocupacao = ocupacao;
         this.descricaoProcesso = descricaoProcesso;
         this.logradouro = logradouro;
         this.numero = numero;
@@ -101,7 +149,7 @@ public class ClienteDTO {
     }
 
     public static ClienteDTO FromModel(Cliente cliente) {
-        return new ClienteDTO(cliente.getCpf(), cliente.getRG(), cliente.getTelefone(),
+        return new ClienteDTO(cliente.getCpf(), cliente.getRG(), cliente.getTelefone(), cliente.getOcupacao(),
                 cliente.getDescricaoProcesso(),
                 cliente.getEndereco().getLogradouro(),cliente.getEndereco().getNumero(),
                 cliente.getEndereco().getComplemento(),cliente.getEndereco().getBairro());

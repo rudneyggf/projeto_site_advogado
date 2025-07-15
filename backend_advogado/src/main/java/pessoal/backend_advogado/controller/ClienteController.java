@@ -57,6 +57,7 @@ public class ClienteController {
 
     @PostMapping
     public ResponseEntity<ClienteDTO> criarCliente (@RequestBody ClienteDTO clienteDto,Authentication authentication){
+        System.out.println("Cliente recebido: " + clienteDto.getRG());
         String nome = authentication.getName();
         Usuario usuario = usuarioRepository.findByNome(nome).get();
         clienteDto.setUsuario(usuario);

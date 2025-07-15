@@ -110,4 +110,12 @@ public class Cliente  {
     public Usuario getUsuario() {
         return usuario;
     }
+
+    public void setOcupacao(String ocupacao) {
+        this.ocupacao = ocupacao;
+    }
+
+    public String getOcupacao() {
+        return ocupacao;
+    }
 }

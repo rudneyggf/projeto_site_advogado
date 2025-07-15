@@ -7,5 +7,5 @@ export interface PedidoProps{
   numero:number
   bairro: string
   complemento?:string
-  descricao_processo: string
+  descricaoProcesso: string
 }
