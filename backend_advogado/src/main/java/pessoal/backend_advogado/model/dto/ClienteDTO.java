@@ -111,8 +111,9 @@ public class ClienteDTO {
     }
 
 
-    public ClienteDTO(String cpf, String RG, String telefone, String ocupacao,
+    public ClienteDTO(Integer id, String cpf, String RG, String telefone, String ocupacao,
                       String logradouro, String numero, String bairro, String complemento, String descricaoProcesso) {
+        this.id=id;
         this.cpf = cpf;
         this.RG = RG;
         this.telefone = telefone;
@@ -149,7 +150,7 @@ public class ClienteDTO {
     }
 
     public static ClienteDTO FromModel(Cliente cliente) {
-        return new ClienteDTO(cliente.getCpf(), cliente.getRG(), cliente.getTelefone(), cliente.getOcupacao(),
+        return new ClienteDTO(cliente.getId(),cliente.getCpf(), cliente.getRG(), cliente.getTelefone(), cliente.getOcupacao(),
                 cliente.getDescricaoProcesso(),
                 cliente.getEndereco().getLogradouro(),cliente.getEndereco().getNumero(),
                 cliente.getEndereco().getComplemento(),cliente.getEndereco().getBairro());

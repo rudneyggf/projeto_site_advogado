@@ -1,4 +1,5 @@
 export interface PedidoProps{ 
+  id: number
   cpf: string
   rg: string
   telefone : string

@@ -10,7 +10,12 @@ import { PedidoProps} from "@/types/pedido";
 
 const Atendimento = () =>{
 
+    const [pedidos_realizados,setPedidosRealizado]=useState<PedidoProps[]>([]);
+
+    
+
     const [pedido_a_cadastrar ,setPedidoCadastro] = useState({
+              id:0,   
               cpf: "",
               rg: "",
               telefone:"",
@@ -23,21 +28,10 @@ const Atendimento = () =>{
     });
 
 
+
     const MostrarPedidos = async () =>{
      
         const token = localStorage.getItem("token") as string ;
-
-        let pedido : PedidoProps = {
-              cpf: "",
-              rg: "",
-              telefone:"",
-              ocupacao: "",
-              logradouro : "",
-              numero: 0,
-              bairro: "",
-              complemento :"",
-              descricaoProcesso: ""
-        }
 
         try{
             const response = await api.get("/cliente/me",{
@@ -47,7 +41,9 @@ const Atendimento = () =>{
             });
           
             const dados_pedidos = response.data;
-            console.log(dados_pedidos);
+            if (dados_pedidos) {
+                setPedidosRealizado(dados_pedidos);
+            }
 
         }catch(error){
             console.log("Ocorreu um erro");
@@ -154,8 +150,10 @@ const Atendimento = () =>{
                     <button type="submit" className={`${style.botoes_CRUD_pedido} ${style.botao_confirmar} `}>Confirmar</button>
                 </form>
             </div>
-
             
+            {pedidos_realizados.map((item, index) => (
+                <Pedido key={index} {...item} atualizarLista={MostrarPedidos} />
+            ))}
          </main>
 
          <Footer></Footer>

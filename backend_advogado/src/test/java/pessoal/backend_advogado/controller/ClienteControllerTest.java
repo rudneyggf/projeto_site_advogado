@@ -48,7 +48,7 @@ class ClienteControllerTest {
 
         when(usuarioRepository.findByNome("Marcelo Henrique")).thenReturn(Optional.of(usuario));
 
-        ClienteDTO clienteDTO = new ClienteDTO("040.543.422-35","2312313-42","(67)1231-2445", "Pedreiro",
+        ClienteDTO clienteDTO = new ClienteDTO(1,"040.543.422-35","2312313-42","(67)1231-2445", "Pedreiro",
                 "Casa de Rochell","43","Bairro de buerarema"
                 ,"Proximo a chupetinha ana bar","Roubou um caminhão de Kitut");
 
@@ -60,7 +60,7 @@ class ClienteControllerTest {
     @Test
     void atualizarCliente() {
 
-        ClienteDTO clienteDTO = new ClienteDTO("040.543.422-35","2312313-42","(67)1231-2445", "Pedreiro",
+        ClienteDTO clienteDTO = new ClienteDTO(1,"040.543.422-35","2312313-42","(67)1231-2445", "Pedreiro",
                 "Casa de Rochell","43","Bairro de buerarema"
                 ,"Proximo a chupetinha ana bar","Roubou um caminhão de Camarão");
 
