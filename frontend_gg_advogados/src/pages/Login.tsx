@@ -5,12 +5,15 @@ import style from "@/css/Sessao.module.css"
 import api from "@/services/api"
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Modal from "@/components/Modal";
 
 export default function Login(){
     const router = useRouter();
     const [nome, setNome] = useState("");
     const [senha, setSenha] = useState("");
-    const [erro, setErro] = useState("");
+    const [mensagemFeedback, setMensagem] = useState("");
+    const [erro,setErro] = useState(false)
+    const [IsModalOpen,setOpen] = useState(false);
     
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -20,12 +23,19 @@ export default function Login(){
 
           const token = response.data;
           localStorage.setItem("token",token);
-          setErro("");
-          
+
           router.push("/HomepageUser");
+
         } catch (error) {
-          setErro(" Senha ou nome inválidos, tente novamente.")
-        }
+          setMensagem(" Senha ou nome inválidos, tente novamente.");
+          setErro(true); 
+          setOpen(true);
+        } 
+       
+    }
+
+    const CloseModal = ()=>{
+      setOpen(false)
     }
 
     return(
@@ -48,11 +58,11 @@ export default function Login(){
                 <label htmlFor="senha">Senha:</label>
                 <input type="password" id="senha" value={senha} onChange={(e) => setSenha(e.target.value)} />
                 <button type="submit">Iniciar Sessão</button>
-                {erro && <p style={{ color: "red" }}>{erro}</p>}
             </form>
             </div>
          </main>
 
+        <Modal isOpen={IsModalOpen} mensagem={mensagemFeedback} isError={erro} closeModal={CloseModal}/>
       <Footer />
     </>
     )

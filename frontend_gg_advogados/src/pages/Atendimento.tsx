@@ -7,26 +7,33 @@ import Pedido from "@/components/Pedido";
 import api from "@/services/api"
 import { useEffect, useState } from "react";
 import { PedidoProps} from "@/types/pedido";
+import Modal from "@/components/Modal";
+
 
 const Atendimento = () =>{
 
     const [pedidos_realizados,setPedidosRealizado]=useState<PedidoProps[]>([]);
 
-    
+    const [mensagemFeedback, setMensagem] = useState("");
+    const [erro,setErro] = useState(false)
+    const [IsModalOpen,setOpen] = useState(false);
 
-    const [pedido_a_cadastrar ,setPedidoCadastro] = useState({
-              id:0,   
-              cpf: "",
-              rg: "",
-              telefone:"",
-              ocupacao: "",
-              logradouro : "",
-              numero: 0,
-              bairro: "",
-              complemento :"",
-              descricaoProcesso: ""
+    const [pedido_a_cadastrar ,setPedidoCadastro] = useState<PedidoProps>({
+              id:null,   
+              cpf: null,
+              rg: null,
+              telefone: null,
+              ocupacao: null,
+              logradouro : null,
+              numero: null,
+              bairro: null,
+              complemento :null,
+              descricaoProcesso: null
     });
 
+    const CloseModal = ()=>{
+        setOpen(false)
+     }
 
 
     const MostrarPedidos = async () =>{
@@ -46,7 +53,9 @@ const Atendimento = () =>{
             }
 
         }catch(error){
-            console.log("Ocorreu um erro");
+           setMensagem("Ocorreu um erro ao carregar os pedidos");
+           setErro(true);
+           setOpen(true);
         }
     }
 
@@ -56,7 +65,7 @@ const Atendimento = () =>{
 
 
     const FazerPedido = async (e: React.FormEvent<HTMLFormElement>) =>{
-        e.preventDefault;
+        e.preventDefault();
         const token = localStorage.getItem("token") as string ;
         try{
             console.log(pedido_a_cadastrar.rg);
@@ -66,9 +75,14 @@ const Atendimento = () =>{
                     Authorization: `Bearer ${token}`
                 }
             });
+
+            setMensagem("Atendimento solicitado com sucesso!");
         }catch(error){
-            console.log("Ocorreu um ao cadastrar um pedido");
+            setMensagem("Ocorreu um erro ao Solicitar Atendimento");
+            setErro(true);
         }
+        setOpen(true);
+        MostrarPedidos();
     }
 
     return (<>
@@ -85,7 +99,7 @@ const Atendimento = () =>{
                 <form onSubmit={FazerPedido} className={style.atendimento} >
                     <span>
                         <label htmlFor="cpf">CPF:</label>
-                        <input type="text" placeholder=" 000.000.000-00" id="cpf" onChange={(e)=>{setPedidoCadastro(prev =>(
+                        <input type="text" placeholder=" 000.000.000-00" id="cpf" value={pedido_a_cadastrar.cpf ?? ""} onChange={(e)=>{setPedidoCadastro(prev =>(
                             {...prev, cpf:e.target.value}
                             ) )}} />
                     </span>
@@ -152,9 +166,11 @@ const Atendimento = () =>{
             </div>
             
             {pedidos_realizados.map((item, index) => (
-                <Pedido key={index} {...item} atualizarLista={MostrarPedidos} />
+                <Pedido key={index} {...item} atualizarLista={MostrarPedidos} setErro={setErro} setMensagem={setMensagem} setModalOpen={setOpen} />
             ))}
          </main>
+
+         <Modal isOpen={IsModalOpen} mensagem={mensagemFeedback} isError={erro} closeModal={CloseModal}/>
 
          <Footer></Footer>
     </>)
