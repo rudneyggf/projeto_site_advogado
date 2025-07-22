@@ -1,11 +1,15 @@
 import React from 'react';
 import style from '@/css/Modal.module.css'
 
-// props necessarias para que o componente de gerenciador controle o modal
+// props necessarias para que o componente pai  controle o modal
 interface ModalProps {
   isOpen: boolean;
   mensagem : string
+
+  // mudará o estilo da mensagem dependendo do valor
   isError : boolean
+
+  // função passada pelo componente pai
   closeModal(): void
 }
 

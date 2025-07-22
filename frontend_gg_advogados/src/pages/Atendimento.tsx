@@ -12,12 +12,15 @@ import Modal from "@/components/Modal";
 
 const Atendimento = () =>{
 
+    // Array que conterá uma lista de pedidos
     const [pedidos_realizados,setPedidosRealizado]=useState<PedidoProps[]>([]);
 
+    // controlam o modal de Mensagem (Modal.tsx)
     const [mensagemFeedback, setMensagem] = useState("");
     const [erro,setErro] = useState(false)
     const [IsModalOpen,setOpen] = useState(false);
 
+    // controla o pedido que será cadastrado
     const [pedido_a_cadastrar ,setPedidoCadastro] = useState<PedidoProps>({
               id:null,   
               cpf: null,
@@ -36,6 +39,7 @@ const Atendimento = () =>{
      }
 
 
+     // Função que obtem uma lista de pedidos
     const MostrarPedidos = async () =>{
      
         const token = localStorage.getItem("token") as string ;
@@ -48,17 +52,21 @@ const Atendimento = () =>{
             });
           
             const dados_pedidos = response.data;
+
+            // armazena na variável se os pedidos existirem
             if (dados_pedidos) {
                 setPedidosRealizado(dados_pedidos);
             }
 
         }catch(error){
+            //controle de modal
            setMensagem("Ocorreu um erro ao carregar os pedidos");
            setErro(true);
            setOpen(true);
         }
     }
 
+    // atualiza a lista sem recarregar a página
     useEffect(()=>{
         MostrarPedidos();
     },[]);
@@ -67,6 +75,7 @@ const Atendimento = () =>{
     const FazerPedido = async (e: React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault();
         const token = localStorage.getItem("token") as string ;
+
         try{
             console.log(pedido_a_cadastrar.rg);
 
@@ -76,6 +85,7 @@ const Atendimento = () =>{
                 }
             });
 
+            //Abaixo é somente controle de modal
             setMensagem("Atendimento solicitado com sucesso!");
         }catch(error){
             setMensagem("Ocorreu um erro ao Solicitar Atendimento");

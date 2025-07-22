@@ -8,15 +8,18 @@ import Modal from "@/components/Modal";
 
 export default function Cadastro(){
 
+      //variáveis de dados de cadastro
       const [nome, setNome] = useState<string|null>(null);
       const [email, setEmail] = useState<string|null>(null);
       const [senha, setSenha] = useState<string|null>(null);
       const [confirm_senha,setConfirmSenha]= useState<string|null>(null);
 
+      //variáveis de controle de modal
       const [mensagemFeedback, setMensagem] = useState("");
       const [erro,setErro] = useState(false)
       const [IsModalOpen,setOpen] = useState(false);
 
+      // 
       const handleSign = async (e: React.FormEvent<HTMLFormElement>) =>{
           e.preventDefault();
 
@@ -26,10 +29,12 @@ export default function Cadastro(){
             }
               await api.post("/autenticar/cadastrar",{nome,email,senha});
 
+            //controle de modal
              setMensagem("Cadastro realizado com Sucesso");
              setErro(false);
 
           } catch (error) {
+            // controle de modal
             setMensagem("Falha Ocorreu ao cadastrar.");
             setErro(true);
             

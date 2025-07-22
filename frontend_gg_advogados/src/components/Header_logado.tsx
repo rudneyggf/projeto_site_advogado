@@ -8,13 +8,20 @@ import { useEffect, useState } from "react";
 
 
 const Header_logado = () =>{
+
+    //variavel para controlar o tipo de header que será mostrado ao logar
     const [adm_logado, setAdmLogado] = useState<boolean | null>(null)
     const router = useRouter();
 
+    //remove o token e leva para a tela principal
     const logout = () =>{
+
+        //remove o token
         localStorage.removeItem("token");
+        
         router.push("/");
     }
+
 
     useEffect(()=> {
             try{
@@ -42,9 +49,12 @@ const Header_logado = () =>{
                 </span>
             </div> 
              <nav className={style.navbar}>
+
                 <Link href="/" className={style.links}>Início</Link>
                 <Link href="/Sobre" className={style.links}>Sobre</Link>
                 <Link href="/" className={style.links}>Contato</Link>
+
+                {/* o que muda dependendo do tipo de perfil */}
                 {!adm_logado && <Link href="/Atendimento" className={style.links}>Requisitar Atendimento</Link> }
                 {adm_logado && <Link href="/" className={style.links}>Gerenciar Casos</Link> }
             </nav>

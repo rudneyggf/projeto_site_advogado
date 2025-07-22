@@ -9,8 +9,12 @@ import Modal from "@/components/Modal";
 
 export default function Login(){
     const router = useRouter();
+
+    // variáveis de Login
     const [nome, setNome] = useState("");
     const [senha, setSenha] = useState("");
+
+    // variáveis que controlam o Modal
     const [mensagemFeedback, setMensagem] = useState("");
     const [erro,setErro] = useState(false)
     const [IsModalOpen,setOpen] = useState(false);
@@ -22,11 +26,15 @@ export default function Login(){
           const response = await api.post("/autenticar/login",{nome,senha});
 
           const token = response.data;
+
+          //armazena o token
           localStorage.setItem("token",token);
 
           router.push("/HomepageUser");
 
         } catch (error) {
+
+          //controle de modal
           setMensagem(" Senha ou nome inválidos, tente novamente.");
           setErro(true); 
           setOpen(true);

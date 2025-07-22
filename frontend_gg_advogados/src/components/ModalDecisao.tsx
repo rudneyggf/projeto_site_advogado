@@ -1,7 +1,7 @@
 import React from 'react';
 import style from '@/css/Modal.module.css'
 
-// props necessarias para que o componente de gerenciador controle o modal
+// props necessarias para que o componente de pai controle o modal
 interface ModalDecisaoProps {
   isOpen: boolean;
   onClose: () => void;
