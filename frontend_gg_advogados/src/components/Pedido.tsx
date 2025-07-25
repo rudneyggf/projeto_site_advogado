@@ -5,6 +5,7 @@ import { Token } from "@/types/token";
 import api from "@/services/api"
 import { useState } from "react";
 import ModalDecisao from "./ModalDecisao";
+import Link from "next/link";
 
 // propriedades além das informações do pedido que são essenciais para o funcionamento da página
 interface PedidoPropsAtualizacaoEffect extends PedidoProps{
@@ -69,7 +70,7 @@ const Pedido = (pedido : PedidoPropsAtualizacaoEffect) =>{
                 <p><span>Ocupação:</span> {pedido.ocupacao} </p>
                 
                 <div className={style.div_botoesCRUD}>
-                    <button className={`${style.botoes_CRUD_pedido} ${style.botao_editar} `} >Editar</button>
+                    <Link href={`/EditarPedido/${pedido.id}`} className={`${style.botoes_CRUD_pedido} ${style.botao_editar} `} >Editar</Link>
                     <button className={`${style.botoes_CRUD_pedido} ${style.botao_deletar} `} onClick={abrirModalParaDeletarPedido} >Excluir</button>
                 </div>
             </div>
