@@ -78,6 +78,8 @@ public class ClienteController {
    @PutMapping("/{id}")
     public ResponseEntity<ClienteDTO> atualizarCliente (@RequestBody ClienteDTO clienteDTO, @PathVariable Integer id){
         clienteDTO.setId(id);
+        Usuario usuario = clienteRepository.findById(id).get().getUsuario();
+        clienteDTO.setUsuario(usuario);
         Cliente cliente = clienteDTO.ToModelPut();
         clienteRepository.save(cliente);
         return ResponseEntity.ok(ClienteDTO.FromModel(cliente));

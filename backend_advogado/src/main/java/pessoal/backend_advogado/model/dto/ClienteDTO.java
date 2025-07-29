@@ -135,7 +135,7 @@ public class ClienteDTO {
         endereco.setNumero(this.numero);
         endereco.setLogradouro(this.logradouro);
 
-        return new Cliente(cpf,RG,ocupacao,telefone,endereco,descricaoProcesso,usuario);
+        return new Cliente(cpf,RG,telefone,ocupacao,endereco,descricaoProcesso,usuario);
     }
 
     public Cliente ToModelPut() {
@@ -146,13 +146,21 @@ public class ClienteDTO {
         endereco.setNumero(this.numero);
         endereco.setLogradouro(this.logradouro);
 
-        return new Cliente(id,cpf,RG,ocupacao,telefone,endereco,descricaoProcesso,usuario);
+        return new Cliente(id,cpf,RG,telefone,ocupacao,endereco,descricaoProcesso,usuario);
     }
 
     public static ClienteDTO FromModel(Cliente cliente) {
-        return new ClienteDTO(cliente.getId(),cliente.getCpf(), cliente.getRG(), cliente.getTelefone(), cliente.getOcupacao(),
-                cliente.getDescricaoProcesso(),
-                cliente.getEndereco().getLogradouro(),cliente.getEndereco().getNumero(),
-                cliente.getEndereco().getComplemento(),cliente.getEndereco().getBairro());
+        return new ClienteDTO(
+                cliente.getId(),
+                cliente.getCpf(),
+                cliente.getRG(),
+                cliente.getTelefone(),
+                cliente.getOcupacao(),
+                cliente.getEndereco().getLogradouro(),
+                cliente.getEndereco().getNumero(),
+                cliente.getEndereco().getBairro(),
+                cliente.getEndereco().getComplemento(),
+                cliente.getDescricaoProcesso()
+        );
     }
 }

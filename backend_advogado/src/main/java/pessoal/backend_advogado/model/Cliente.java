@@ -51,7 +51,7 @@ public class Cliente  {
         this.usuario = usuario;
     }
 
-    public Cliente(Integer id,String cpf, String RG,String ocupacao , String telefone, Endereco endereco, String descricaoProcesso, Usuario usuario) {
+    public Cliente(Integer id,String cpf, String RG, String telefone , String ocupacao, Endereco endereco, String descricaoProcesso, Usuario usuario) {
         this.id = id;
         this.cpf = cpf;
         this.ocupacao = ocupacao;

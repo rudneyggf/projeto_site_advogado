@@ -30,7 +30,7 @@ export default function Login(){
           //armazena o token
           localStorage.setItem("token",token);
 
-          router.push("/HomepageUser");
+          router.push("/");
 
         } catch (error) {
 

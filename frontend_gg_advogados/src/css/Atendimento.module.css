@@ -28,6 +28,8 @@
     padding: 10px;
     border: none;
     font-size: 20px;
+    cursor: pointer;
+    text-align: center;
 }
 
 .atendimento label{
@@ -62,10 +64,36 @@
 .botao_editar{
     background-color: rgb(24, 157, 209);
      min-width: 300px;
+     text-decoration: none;
 }
 
 .div_botoesCRUD{
     display: flex;
     justify-content: space-around;
-    
+ }   
+
+
+.botao_voltar{
+    text-decoration: none;
+    color: black;
+    background-color: lightgray;;
+    padding: 10px;
+    font-size: 20px;
+    width: 80px;
+    text-align: center;
+    border-radius: 5px;
+    margin-left: 20px;
+
+}
+
+.botao_voltar:hover{
+    background-color: black;
+    color: white;
+}
+
+.cabecalho_edicao {
+  display: flex;
+  align-items: center; 
+  gap: 660px; 
+  margin-bottom: 20px;
 }

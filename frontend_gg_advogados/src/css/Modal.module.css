@@ -55,6 +55,11 @@
   background-color: gray;
 }
 
+.botao_modal_gray:hover{
+  background-color: black;
+  color: white;
+}
+
 .botao_modal_nao{
   background-color: red;
 }
