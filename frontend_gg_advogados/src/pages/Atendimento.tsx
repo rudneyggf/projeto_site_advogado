@@ -10,6 +10,7 @@ import { PedidoProps } from "@/types/pedido";
 import Modal from "@/components/Modal";
 
 const Atendimento = () => {
+  
   // Array que conterá uma lista de pedidos
   const [pedidos_realizados, setPedidosRealizado] = useState<PedidoProps[]>([]);
 

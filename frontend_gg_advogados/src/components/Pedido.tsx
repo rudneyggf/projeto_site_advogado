@@ -3,7 +3,7 @@ import style from "@/css/Atendimento.module.css"
 import { jwtDecode } from "jwt-decode";
 import { Token } from "@/types/token";
 import api from "@/services/api"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalDecisao from "./ModalDecisao";
 import Link from "next/link";
 
@@ -24,6 +24,8 @@ const Pedido = (pedido : PedidoPropsAtualizacaoEffect) =>{
     const token = localStorage.getItem("token") as string;
     const decoded_token = jwtDecode(token) as Token ;
 
+    const [nomePedido,setNomePedido] = useState("");
+
     //variáveis que controlam o modal de decisão
     const[IsModalDecisaoOpen,setDecisaoOpen]= useState(false);
     const [mensagemModalDecisao,setMensagemModal] = useState("");
@@ -33,6 +35,21 @@ const Pedido = (pedido : PedidoPropsAtualizacaoEffect) =>{
         setDecisaoOpen(false);
     }
 
+    const NomePedido = async (id : number) =>{
+        const response = await api.get(`/cliente/nome/${id}`, {
+            headers:{
+                Authorization:`Bearer ${token}`
+            }
+        })
+
+        const nome = response.data;
+        setNomePedido(nome)
+    }
+
+    useEffect(() => {
+          if(decoded_token.authorities.includes("ROLE_ADMIN"))
+            NomePedido(pedido.id!);
+        }, []);
     
     const abrirModalParaDeletarPedido = () =>{
         setMensagemModal("Tem certeza que deseja deletar a solicitação?")
@@ -49,6 +66,7 @@ const Pedido = (pedido : PedidoPropsAtualizacaoEffect) =>{
 
                 // atualiza a lista de pedidos após carregar sem deletar a página
                 pedido.atualizarLista();
+                setDecisaoOpen(false);
             } catch (error) {
 
                 // controle do modal da página "pai" Atendimento
@@ -59,27 +77,48 @@ const Pedido = (pedido : PedidoPropsAtualizacaoEffect) =>{
                 setDecisaoOpen(false);
             }
         }
-
-
-    return(
-           <>
-            <div className= {style.pedido}  >
-                <p><span>Nome:</span> {decoded_token.sub} </p>
-                <p><span>CPF:</span> {pedido.cpf} </p>
-                <p><span>RG: </span> {pedido.rg} </p>
-                <p><span>Ocupação:</span> {pedido.ocupacao} </p>
-                
-                <div className={style.div_botoesCRUD}>
-                    <Link href={`/EditarPedido/${pedido.id}`} className={`${style.botoes_CRUD_pedido} ${style.botao_editar} `} >Editar</Link>
-                    <button className={`${style.botoes_CRUD_pedido} ${style.botao_deletar} `} onClick={abrirModalParaDeletarPedido} >Excluir</button>
+    
+    if (decoded_token.authorities.includes("ROLE_ADMIN")) {
+        return(
+                <>
+                <div className= {style.pedido}  >
+                    <p><span>Id do pedido:</span> {pedido.id} </p>
+                    <p><span>Nome:</span> {nomePedido} </p>
+                    <p><span>CPF:</span> {pedido.cpf} </p>
+                    
+                    <div className={style.div_botoesCRUD}>
+                        <Link href={``} className={`${style.botoes_CRUD_pedido} ${style.botao_detalhe} `} >Ver Detalhes</Link>
+                        <button className={`${style.botoes_CRUD_pedido} ${style.botao_deletar} `} onClick={abrirModalParaDeletarPedido} >Excluir</button>
+                    </div>
                 </div>
-            </div>
 
-            <ModalDecisao isOpen={IsModalDecisaoOpen} onClose={closeModalDecisao} deleteFunction={DeletarPedido} mensagem={mensagemModalDecisao} />
+                <ModalDecisao isOpen={IsModalDecisaoOpen} onClose={closeModalDecisao} deleteFunction={DeletarPedido} mensagem={mensagemModalDecisao} />
 
-            </>
+                </>
+            )
 
-    )
+    }else{ 
+        return(
+            <>
+                <div className= {style.pedido}  >
+                    <p><span>Nome:</span> {decoded_token.sub} </p>
+                    <p><span>CPF:</span> {pedido.cpf} </p>
+                    <p><span>RG: </span> {pedido.rg} </p>
+                    <p><span>Ocupação:</span> {pedido.ocupacao} </p>
+                    
+                    <div className={style.div_botoesCRUD}>
+                        <Link href={`/EditarPedido/${pedido.id}`} className={`${style.botoes_CRUD_pedido} ${style.botao_editar} `} >Editar</Link>
+                        <button className={`${style.botoes_CRUD_pedido} ${style.botao_deletar} `} onClick={abrirModalParaDeletarPedido} >Excluir</button>
+                    </div>
+                </div>
+
+                <ModalDecisao isOpen={IsModalDecisaoOpen} onClose={closeModalDecisao} deleteFunction={DeletarPedido} mensagem={mensagemModalDecisao} />
+
+                </>
+
+        )
+    }
+
 }
 
 

@@ -30,6 +30,7 @@
     font-size: 20px;
     cursor: pointer;
     text-align: center;
+    text-decoration: none;
 }
 
 .atendimento label{
@@ -64,12 +65,17 @@
 .botao_editar{
     background-color: rgb(24, 157, 209);
      min-width: 300px;
-     text-decoration: none;
+}
+
+.botao_detalhe{
+    background-color: gray;
+     min-width: 300px;
 }
 
 .div_botoesCRUD{
     display: flex;
     justify-content: space-around;
+    
  }   
 
 

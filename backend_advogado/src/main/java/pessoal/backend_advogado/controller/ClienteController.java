@@ -27,7 +27,7 @@ public class ClienteController {
 
     @GetMapping
     public List<ClienteDTO> listarClientesEmOrdemAlfabetica (){
-        return clienteRepository.findAll().
+        return clienteRepository.findAllOrderByNomeUsuario().
                 stream().
                 map(ClienteDTO::FromModel).
                 collect(Collectors.toList());
@@ -53,6 +53,16 @@ public class ClienteController {
                 .stream()
                 .map(ClienteDTO::FromModel)
                 .collect(Collectors.toList());
+    }
+
+
+    @GetMapping("/nome/{id}")
+    public ResponseEntity<String> buscarNomeUsuarioDoCliente(@PathVariable Integer id){
+        Cliente cliente = clienteRepository.findById(id).get();
+        Usuario usuario = cliente.getUsuario();
+        String nome = usuario.getUsername();
+
+        return ResponseEntity.ok(nome);
     }
 
     @PostMapping

@@ -66,7 +66,7 @@ const Header = () =>{
 
                     {/* o que muda dependendo do tipo de perfil */}
                     {!adm_logado && <Link href="/Atendimento" className={style.links}>Requisitar Atendimento</Link> }
-                    {adm_logado && <Link href="/" className={style.links}>Gerenciar Casos</Link> }
+                    {adm_logado && <Link href="/Gerenciamento" className={style.links}>Gerenciar Casos</Link> }
                 </nav>
             </header>
         )
