@@ -97,9 +97,20 @@
     color: white;
 }
 
-.cabecalho_edicao {
+.cabecalho_edicao,.cabecalho_detalhes{
   display: flex;
   align-items: center; 
-  gap: 660px; 
   margin-bottom: 20px;
+}
+
+.cabecalho_edicao{
+    gap: 660px;
+}
+
+.cabecalho_detalhes{
+    gap: 720px;
+}
+
+.pedido_detalhes{
+    font-weight: bold;
 }

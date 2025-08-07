@@ -11,6 +11,7 @@ import router from "next/router";
 import "@/css/globals.css";
 import Link from "next/link";
 
+
 export const getStaticPaths = async () => {
   return {
     paths: [],
@@ -39,9 +40,8 @@ export default function EdicaoPedido(props: { EditarPedidoId: string }) {
 
   const id = Number.parseInt(props.EditarPedidoId);
 
-  const [pedidoOriginal, setPedidoOriginal] = useState<PedidoProps | null>(
-    null
-  );
+  const [pedidoOriginal, setPedidoOriginal] = useState<PedidoProps | null>(null);
+  
   const [pedidoAEditar, setPedidoEditar] = useState<PedidoProps | null>(null);
 
   const GetListaPedidos = async () => {

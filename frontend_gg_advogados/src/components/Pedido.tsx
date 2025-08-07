@@ -87,7 +87,7 @@ const Pedido = (pedido : PedidoPropsAtualizacaoEffect) =>{
                     <p><span>CPF:</span> {pedido.cpf} </p>
                     
                     <div className={style.div_botoesCRUD}>
-                        <Link href={``} className={`${style.botoes_CRUD_pedido} ${style.botao_detalhe} `} >Ver Detalhes</Link>
+                        <Link href={`/GerenciarPedido/${pedido.id}`} className={`${style.botoes_CRUD_pedido} ${style.botao_detalhe} `} >Ver Detalhes</Link>
                         <button className={`${style.botoes_CRUD_pedido} ${style.botao_deletar} `} onClick={abrirModalParaDeletarPedido} >Excluir</button>
                     </div>
                 </div>

@@ -48,6 +48,9 @@ public class ClienteDTO {
         return telefone;
     }
 
+    public String getNumero() {
+        return numero;
+    }
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
