@@ -41,6 +41,7 @@
     font-size: 20px;
     text-align: center;
     cursor: pointer;
+    
 }
 
 .botoes_cadastro_login:hover{
@@ -52,4 +53,9 @@
 .logo{
 margin-right: 300px;
 margin-left: 530px;
+}
+
+.logo_deslogado{
+    margin-right: 350px;
+    margin-left: 350px;
 }
