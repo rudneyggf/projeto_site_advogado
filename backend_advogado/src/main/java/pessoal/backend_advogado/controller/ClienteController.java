@@ -9,6 +9,7 @@ import pessoal.backend_advogado.model.Usuario;
 import pessoal.backend_advogado.model.dto.ClienteDTO;
 import pessoal.backend_advogado.repository.ClienteRepository;
 import pessoal.backend_advogado.repository.UsuarioRepository;
+import pessoal.backend_advogado.service.ClienteService;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,14 +24,14 @@ public class ClienteController {
     private ClienteRepository clienteRepository;
 
     @Autowired
+    private ClienteService clienteService;
+
+    @Autowired
     private UsuarioRepository usuarioRepository;
 
     @GetMapping
-    public List<ClienteDTO> listarClientesEmOrdemAlfabetica (){
-        return clienteRepository.findAllOrderByNomeUsuario().
-                stream().
-                map(ClienteDTO::FromModel).
-                collect(Collectors.toList());
+    public List<ClienteDTO> listarClientesEmOrdemAlfabetica (@RequestParam int pagina, @RequestParam int itens){
+        return clienteService.listarClientesEmOrdemAlfabetica(pagina,itens);
     }
 
     @GetMapping("/{id}")
@@ -55,6 +56,12 @@ public class ClienteController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("/me/paginado")
+    public List<ClienteDTO> buscarClienteMePaginas (@RequestParam int pagina,@RequestParam int itens,Authentication authentication){
+        String nome = authentication.getName();
+
+        return clienteService.buscarClienteMe(nome, pagina, itens);
+    }
 
     @GetMapping("/nome/{id}")
     public ResponseEntity<String> buscarNomeUsuarioDoCliente(@PathVariable Integer id){

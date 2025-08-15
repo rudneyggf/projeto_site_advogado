@@ -55,7 +55,7 @@ const Atendimento = () => {
     const token = localStorage.getItem("token") as string;
 
     try {
-      const response = await api.get("/cliente/me", {
+      const response = await api.get("/cliente/me/paginado?pagina=0&itens=4", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

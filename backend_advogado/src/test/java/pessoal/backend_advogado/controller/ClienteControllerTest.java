@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import pessoal.backend_advogado.model.Cliente;
@@ -16,10 +17,12 @@ import pessoal.backend_advogado.model.Usuario;
 import pessoal.backend_advogado.model.dto.ClienteDTO;
 import pessoal.backend_advogado.repository.ClienteRepository;
 import pessoal.backend_advogado.repository.UsuarioRepository;
+import pessoal.backend_advogado.service.ClienteService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -33,6 +36,9 @@ class ClienteControllerTest {
 
     @Mock
     private UsuarioRepository usuarioRepository;
+
+    @Mock
+    private ClienteService clienteService;
 
     @Mock
     private  Authentication authentication;
@@ -64,6 +70,9 @@ class ClienteControllerTest {
                 "Casa de Rochell","43","Bairro de buerarema"
                 ,"Proximo a chupetinha ana bar","Roubou um caminhão de Camarão");
 
+        Cliente cliente = clienteDTO.ToModel();
+        when(clienteRepository.findById(1)).thenReturn(Optional.of(cliente));
+
         clienteController.atualizarCliente(clienteDTO,1);
 
         verify(clienteRepository,times(1)).save(any(Cliente.class));
@@ -74,9 +83,19 @@ class ClienteControllerTest {
 
         when(authentication.getName()).thenReturn("PedroPereiraPelo");
         List<Cliente> clientes = new ArrayList<>();
-        when(clienteRepository.findByUsuarioNome("PedroPereiraPelo")).thenReturn(clientes);
+        int paginas = 2;
+        int itens =1;
 
-        List <ClienteDTO> lista = clienteController.buscarClienteMe(authentication);
+        List<ClienteDTO> listaClienteDTO = clientes
+                .stream()
+                .map(ClienteDTO::FromModel)
+                .collect(Collectors.toList());
+
+
+        when(clienteService.buscarClienteMe("PedroPereiraPelo",paginas,itens)).thenReturn(listaClienteDTO);
+
+
+        List <ClienteDTO> lista = clienteController.buscarClienteMePaginas(paginas,itens,authentication);
         assertNotNull(lista);
     }
 }

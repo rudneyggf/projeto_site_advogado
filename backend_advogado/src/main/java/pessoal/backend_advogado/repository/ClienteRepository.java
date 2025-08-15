@@ -1,5 +1,6 @@
 package pessoal.backend_advogado.repository;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -11,7 +12,8 @@ import java.util.List;
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
     public List<Cliente> findByUsuarioNome(String nome);
+    public List<Cliente> findByUsuarioNome(String nome, Pageable pageable);
 
     @Query("SELECT c FROM Cliente c ORDER BY c.usuario.nome")
-    List<Cliente> findAllOrderByNomeUsuario();
+    List<Cliente> findAllOrderByNomeUsuario(Pageable pageable);
 }

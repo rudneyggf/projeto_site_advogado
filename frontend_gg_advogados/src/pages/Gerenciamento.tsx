@@ -26,7 +26,7 @@ const Gerenciamento = () =>{
     const token = localStorage.getItem("token") as string;
 
     try {
-      const response = await api.get("/cliente", {
+      const response = await api.get("/cliente?pagina=1&itens=2", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -62,11 +62,11 @@ const Gerenciamento = () =>{
           <Header></Header>
 
           <main className={style.flex_main} >
-            <h1> Lista de Pedidos dos Cliente</h1>
+            <h1> Lista de Pedidos dos Clientes</h1>
 
-            {pedidos_realizados.map((item, index) => (
+            {pedidos_realizados.map((item) => (
                 <Pedido
-                  key={index}
+                  key={item.id}
                   {...item}
                   atualizarLista={MostrarPedidos}
                   setErro={setErro}

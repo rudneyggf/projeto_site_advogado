@@ -40,6 +40,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET,"/usuario/*").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET,"/cliente").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET,"/cliente/me").hasRole("USUARIO")
+                        .requestMatchers(HttpMethod.GET,"/cliente/me/paginado").hasRole("USUARIO")
                         .requestMatchers(HttpMethod.GET,"/cliente/*").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT,"/cliente/*").hasRole("USUARIO")
                         .requestMatchers(HttpMethod.POST,"/cliente").hasRole("USUARIO")

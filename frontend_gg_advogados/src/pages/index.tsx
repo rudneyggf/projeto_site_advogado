@@ -11,6 +11,7 @@ export default function Main(){
             <Head>
                 <link rel="stylesheet" 
                 href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" />
+                <html lang="pt-BR"/>
             </Head>
 
             <Header/>
