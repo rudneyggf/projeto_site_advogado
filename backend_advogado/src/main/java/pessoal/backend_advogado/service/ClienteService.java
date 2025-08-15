@@ -1,6 +1,7 @@
 package pessoal.backend_advogado.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import pessoal.backend_advogado.model.Cliente;
@@ -16,22 +17,17 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    public List<ClienteDTO> buscarClienteMe (String nome,int pagina, int itens){
-        List<Cliente> listaCliente = clienteRepository.findByUsuarioNome(nome, PageRequest.of(pagina, itens));
+    public Page<ClienteDTO> buscarClienteMe (String nome,int pagina, int itens){
+        Page<Cliente> listaCliente = clienteRepository.findByUsuarioNome(nome, PageRequest.of(pagina, itens));
 
-            return listaCliente
-                    .stream()
-                    .map(ClienteDTO::FromModel)
-                    .collect(Collectors.toList());
+            return listaCliente.map(ClienteDTO::FromModel);
     }
 
-    public List<ClienteDTO> listarClientesEmOrdemAlfabetica (int pagina, int itens){
+    public Page<ClienteDTO> listarClientesEmOrdemAlfabetica (int pagina, int itens){
 
-        List<Cliente> listaCliente = clienteRepository.findAllOrderByNomeUsuario(PageRequest.of(pagina, itens));
+        Page<Cliente> listaCliente = clienteRepository.findAllOrderByNomeUsuario(PageRequest.of(pagina, itens));
 
-        return listaCliente.stream().
-                map(ClienteDTO::FromModel).
-                collect(Collectors.toList());
+        return listaCliente.map(ClienteDTO::FromModel);
     }
 
 }

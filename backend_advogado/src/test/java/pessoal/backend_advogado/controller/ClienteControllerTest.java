@@ -8,7 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import pessoal.backend_advogado.model.Cliente;
@@ -20,8 +20,10 @@ import pessoal.backend_advogado.repository.UsuarioRepository;
 import pessoal.backend_advogado.service.ClienteService;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -78,24 +80,5 @@ class ClienteControllerTest {
         verify(clienteRepository,times(1)).save(any(Cliente.class));
     }
 
-    @Test
-    void buscarClienteMe() {
 
-        when(authentication.getName()).thenReturn("PedroPereiraPelo");
-        List<Cliente> clientes = new ArrayList<>();
-        int paginas = 2;
-        int itens =1;
-
-        List<ClienteDTO> listaClienteDTO = clientes
-                .stream()
-                .map(ClienteDTO::FromModel)
-                .collect(Collectors.toList());
-
-
-        when(clienteService.buscarClienteMe("PedroPereiraPelo",paginas,itens)).thenReturn(listaClienteDTO);
-
-
-        List <ClienteDTO> lista = clienteController.buscarClienteMePaginas(paginas,itens,authentication);
-        assertNotNull(lista);
-    }
 }

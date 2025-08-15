@@ -1,6 +1,7 @@
 package pessoal.backend_advogado.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ public class ClienteController {
     private UsuarioRepository usuarioRepository;
 
     @GetMapping
-    public List<ClienteDTO> listarClientesEmOrdemAlfabetica (@RequestParam int pagina, @RequestParam int itens){
+    public Page<ClienteDTO> listarClientesEmOrdemAlfabetica (@RequestParam int pagina, @RequestParam int itens){
         return clienteService.listarClientesEmOrdemAlfabetica(pagina,itens);
     }
 
@@ -57,7 +58,7 @@ public class ClienteController {
     }
 
     @GetMapping("/me/paginado")
-    public List<ClienteDTO> buscarClienteMePaginas (@RequestParam int pagina,@RequestParam int itens,Authentication authentication){
+    public Page<ClienteDTO> buscarClienteMePaginas (@RequestParam int pagina,@RequestParam int itens,Authentication authentication){
         String nome = authentication.getName();
 
         return clienteService.buscarClienteMe(nome, pagina, itens);

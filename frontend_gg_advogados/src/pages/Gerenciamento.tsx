@@ -18,15 +18,20 @@ const Gerenciamento = () =>{
     const [erro, setErro] = useState(false);
     const [IsModalOpen, setOpen] = useState(false);
 
+
+    const [paginaAtual, setPaginaAtual] = useState(0); 
+    const [itensPorPagina] = useState(3);
+    const [totalPaginas, setTotalPaginas] = useState(0);
+
     const CloseModal = () => {
     setOpen(false);
     };
 
-    const MostrarPedidos = async () => {
+    const MostrarPedidos = async (pagina:number) => {
     const token = localStorage.getItem("token") as string;
 
     try {
-      const response = await api.get("/cliente?pagina=1&itens=2", {
+      const response = await api.get(`/cliente?pagina=${pagina}&itens=${itensPorPagina}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -36,7 +41,9 @@ const Gerenciamento = () =>{
 
       // armazena na variável se os pedidos existirem
       if (dados_pedidos) {
-        setPedidosRealizado(dados_pedidos);
+        setPedidosRealizado(dados_pedidos.content);
+        setTotalPaginas(dados_pedidos.totalPages);
+        setPaginaAtual(pagina)
       }
     } catch (error) {
       //controle de modal
@@ -48,7 +55,7 @@ const Gerenciamento = () =>{
 
   // atualiza a lista sem recarregar a página
     useEffect(() => {
-      MostrarPedidos();
+      MostrarPedidos(0);
     }, []);
 
     return(
@@ -68,12 +75,24 @@ const Gerenciamento = () =>{
                 <Pedido
                   key={item.id}
                   {...item}
-                  atualizarLista={MostrarPedidos}
+                  atualizarLista={()=>MostrarPedidos(paginaAtual)}
                   setErro={setErro}
                   setMensagem={setMensagem}
                   setModalOpen={setOpen}
                 />
               ))}
+
+            <div className={style.paginacao}>
+              <button onClick={() => MostrarPedidos(paginaAtual - 1)} disabled={paginaAtual === 0}>
+                Anterior
+              </button>
+
+              <span>Página {paginaAtual + 1} de {totalPaginas}</span>
+
+              <button onClick={() => MostrarPedidos(paginaAtual + 1)} disabled={paginaAtual + 1 >= totalPaginas}>
+                Próximo
+              </button>
+            </div>
               
           </main>
 
