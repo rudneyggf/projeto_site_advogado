@@ -30,6 +30,8 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 };
 
 export default function EdicaoPedido(props: { EditarPedidoId: string }) {
+
+  //variáveis responsáveis pelo controle do modal
   const [mensagemFeedback, setMensagem] = useState("");
   const [erro, setErro] = useState(false);
   const [IsModalOpen, setOpen] = useState(false);
@@ -44,6 +46,7 @@ export default function EdicaoPedido(props: { EditarPedidoId: string }) {
   
   const [pedidoAEditar, setPedidoEditar] = useState<PedidoProps | null>(null);
 
+  // Encontra uma lista de pedidos feitos pelo cliente e depois filtra o pedido que ele escolheu editar, armazenando os dados desse.
   const GetListaPedidos = async () => {
     const token = localStorage.getItem("token") as string;
 
@@ -55,6 +58,7 @@ export default function EdicaoPedido(props: { EditarPedidoId: string }) {
 
     const dados = response.data as PedidoProps[];
     const pedidoEncontrado = dados.find((p) => p.id === id);
+    
     if (pedidoEncontrado) {
       setPedidoOriginal(pedidoEncontrado);
       setPedidoEditar(pedidoEncontrado);
@@ -79,6 +83,7 @@ export default function EdicaoPedido(props: { EditarPedidoId: string }) {
       setErro(false);
       setMensagem("Edição concluída com sucesso");
       setOpen(true);
+
     } catch (error) {
       setErro(true);
       setMensagem(

@@ -22,7 +22,7 @@ export default function Main(){
                     <p id="paragrafo_slogan">Geraldo Guedes um dos mais renomados advogados trabalhistas de Goiana,
                         formado no Centro Universitário de João Pessoa. Defendendo seus direitos no trabalho com coragem, clareza e compromisso.
                     </p>
-                </section>
+                    </section>
 
                 <section id="section_2">
                     <ul>

@@ -30,6 +30,7 @@ export default function GerenciaPedido(props: { GerenciarPedidoId: string }){
 
     const id = Number.parseInt(props.GerenciarPedidoId);
 
+    //variáveis que gerenciam o modal
     const [mensagemFeedback, setMensagem] = useState("");
     const [erro, setErro] = useState(false);
     const [IsModalOpen, setOpen] = useState(false);
@@ -40,6 +41,7 @@ export default function GerenciaPedido(props: { GerenciarPedidoId: string }){
 
     const CloseModal = () => setOpen(false);
 
+    // encontra os dados do pedido baseado no id fornecido pela URL
     const encontrarPedido = async () =>{
         const token = localStorage.getItem("token") as string;
         try {
@@ -59,6 +61,7 @@ export default function GerenciaPedido(props: { GerenciarPedidoId: string }){
         }
     }
 
+    // Seta o nome do usuário que fez o pedido
     const encontrarNomeCliente = async () =>{
         const token = localStorage.getItem("token") as string;
 

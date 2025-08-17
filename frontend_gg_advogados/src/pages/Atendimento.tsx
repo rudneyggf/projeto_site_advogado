@@ -19,7 +19,7 @@ const Atendimento = () => {
   const [erro, setErro] = useState(false);
   const [IsModalOpen, setOpen] = useState(false);
 
-
+  //variáveis responsáveis pela paginação na função MostrarPedidos
   const [paginaAtual, setPaginaAtual] = useState(0); 
   const [itensPorPagina] = useState(3);
   const [totalPaginas, setTotalPaginas] = useState(0);

@@ -35,6 +35,7 @@ const Pedido = (pedido : PedidoPropsAtualizacaoEffect) =>{
         setDecisaoOpen(false);
     }
 
+    // Seta o nome do usuário que fez o pedido
     const NomePedido = async (id : number) =>{
         const response = await api.get(`/cliente/nome/${id}`, {
             headers:{
@@ -45,6 +46,7 @@ const Pedido = (pedido : PedidoPropsAtualizacaoEffect) =>{
         const nome = response.data;
         setNomePedido(nome)
     }
+
 
     useEffect(() => {
           if(decoded_token.authorities.includes("ROLE_ADMIN"))

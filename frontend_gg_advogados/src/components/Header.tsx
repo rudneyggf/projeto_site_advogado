@@ -15,6 +15,7 @@ const Header = () =>{
     const [login_realizado,setLogin] = useState<boolean | null>(null);
     const router = useRouter();
 
+    // Permite Logar com conta predefinina para testar o site
     const LoginTeste = async (nome:string,senha:string)=>{
         
         const response = await api.post("/autenticar/login",{nome,senha});
