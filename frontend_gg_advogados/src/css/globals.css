@@ -78,3 +78,35 @@ h1{
   text-align: center;
 }
 
+/* animação */
+
+#foto_gera,
+.grupo_ul_1,
+#section_1 p,
+.grupo_ul_2,
+.informacoes_de_contato div,
+.informacoes_de_contato iframe{
+  transition: all 1s ease-out;
+}
+
+
+#foto_gera,.grupo_ul_1,.informacoes_de_contato div{
+   transform: translateX(-1000px); 
+}
+
+#section_1 p,.grupo_ul_2,.informacoes_de_contato iframe{
+  transform: translateX(1000px); 
+}
+
+
+
+#foto_gera.visible,
+#section_1 p.visible,
+.grupo_ul_1.visible,
+.grupo_ul_2.visible,
+.informacoes_de_contato div.visible,
+.informacoes_de_contato iframe.visible {
+  transform: translateX(0px);
+}
+
+

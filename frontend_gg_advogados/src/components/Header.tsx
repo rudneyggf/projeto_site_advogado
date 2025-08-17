@@ -105,7 +105,7 @@ const Header = () =>{
                     <button  className={style.botoes_cadastro_login} onClick={TestatComoAdmin} >Test as Admin</button>
                     <button  className={style.botoes_cadastro_login} onClick={TestatComoCliente} >Test as Client</button>
                 </span>
-                <Image  className={style.logo_deslogado} src="/images/logo_Geraldo_Advogado-fundoR.png" height="220" width="500" alt="Logo da Geraldo Advogados"></Image>
+                <Image  className={style.logo_deslogado} src="/images/logo_Geraldo_Advogado-fundoR.png" height="240" width="500" alt="Logo da Geraldo Advogados"></Image>
                 <span className={style.botoes_header}>
                     <Link href="/Login" className={style.botoes_cadastro_login} >Login</Link>
                     <Link href="/Cadastro" className={style.botoes_cadastro_login}>Cadastro</Link>

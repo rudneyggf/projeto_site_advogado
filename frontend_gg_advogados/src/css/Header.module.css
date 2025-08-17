@@ -1,7 +1,8 @@
 .div_header{
     display: flex;
     background-color: lightgray;
-    justify-content: center;
+    justify-content: center; 
+    height: 230px;
 }
 
 .navbar{
